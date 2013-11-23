@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+
+{% block content %}
+
+<body class="pure">
+        <div id="pure-skin-lumberjack">
+
+                <script type="text/javascript"
+                        src="{{ STATIC_URL }}/js/jquery-1.9.1.js">
+                        
+                </script>
+                <script type="text/javascript"
+                        src="{{ STATIC_URL }}/js/jquery-ui-1.10.3.custom.js">
+                        
+                </script>
+                                <script type="text/javascript"
+                        src="{{ STATIC_URL }}/js/jquery-ui-timepicker-addon.js">
+                        
+                </script>
+                <style type = "text/css">
+                .ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
+.ui-timepicker-div dl { text-align: left; }
+.ui-timepicker-div dl dt { float: left; clear:left; padding: 0 0 0 5px; }
+.ui-timepicker-div dl dd { margin: 0 10px 10px 45%; }
+.ui-timepicker-div td { font-size: 90%; }
+.ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
+
+.ui-timepicker-rtl{ direction: rtl; }
+.ui-timepicker-rtl dl { text-align: right; padding: 0 5px 0 0; }
+.ui-timepicker-rtl dl dt{ float: right; clear: right; }
+.ui-timepicker-rtl dl dd { margin: 0 45% 10px 10px; }
+                </style>
+                <link rel="stylesheet" href="{{ STATIC_URL }}/css/ui-lightness/jquery-ui-1.10.3.custom.css">
+                <script>
+                        $(function() {
+                                $("#startdatepicker").datepicker();
+                                $("#enddatepicker").datepicker();
+                                $('#startTime').timepicker({
+                                    timeFormat: "hh:mmtt"
+                                });
+                                $('#endTime').timepicker({
+                                    timeFormat: "hh:mmtt"
+                                });
+                        });
+                </script>
+
+                <form action="{% url 'instantiate' %}" method="post" class="pure-form pure-form-stacked">
+                        {% csrf_token %}
+                        <fieldset>
+                                <legend>LumberJack</legend>
+                                <label for = "shiftName"> Name: <input type = "text" name = "shiftName" /> </label>
+
+                                <label for = "organization"> Organization: <br />
+                                <select size = "5" name = "organization" id = "organization">
+                                {% for organization in organizations.iterator %}
+                                <option value = "{{organization.id}}"> {{organization.name}} </option>
+                                {% endfor %}
+                                </select>
+                                </label>
+                                <label for="days"> Days:<br /> <select size="7"
+                                        multiple="true" name="days" id="days">
+                                                <option>Sunday</option>
+                                                <option>Monday</option>
+                                                <option>Tuesday</option>
+                                                <option>Wednesday</option>
+                                                <option>Thursday</option>
+                                                <option>Friday</option>
+                                                <option>Saturday</option>
+                                </select>
+
+                                </label>
+                                
+                                
+                                <div class="pure-g-r">
+                                        <div class="pure-u-1-2">
+                                                <label for="startTime"> Start Time: <input type="text"
+                                                        name="startTime" id="startTime" />
+                                                </label>
+                                        </div>
+
+
+                                        <div class="pure-u-1-2">
+                                                <label for="endTime"> End Time: <input type="text"
+                                                        name="endTime" id="endTime" />
+                                                </label>
+                                        </div>
+
+                                        <div class="pure-u-1-2">
+                                                <label for="startDate"> Start Date: <input type="text"
+                                                        name="startDate" id="startdatepicker" />
+                                                </label>
+                                        </div>
+
+                                        <div class="pure-u-1-2">
+                                                <label for="endDate"> End Date: <input type="text"
+                                                        name="endDate" id="enddatepicker" />
+                                                </label>
+                                        </div>
+                                </div>
+                                
+                                <legend>Bonner</legend>
+                                
+                                <label for = "bonner"> Bonner <input type = "checkbox" id = "bonner" name = "bonner" /> </label>
+                                <div id = "bonner_details">
+                                <label for="bonner_position"> Position <input type="text"
+                                        name="bonner_position" value = "Elderly Outreach Organizer @ W&amp;L Elderly Outreach Program (Fall 2013)" id="position" />
+                                </label> </label>
+                                </div>
+                                <script>
+                                showBonner = function() {
+                                    $("#bonner_details").show();
+                                    $("#bonner").change(hideBonner);
+                                }
+                                hideBonner = function() {
+                                    $("#bonner_details").hide()
+                                    $("#bonner").change(showBonner);
+                                }
+                                hideBonner();
+                                </script>
+                                
+                                
+                                
+                                <legend>Community Engagement</legend>
+                                
+                                <label for = "wlu_ce">W&amp;L Community Engagement <input type = "checkbox" name = "wlu_ce" id = "wlu_ce" /> </label>
+                                <div id = "wlu_ce_details">
+                                <label for = "wlu_ce_organization">Organization: 
+                                <select name = "wlu_ce_organization">
+                                <option>Campus Kitchen at Washington and Lee</option>
+                                <option>American Red Cross</option>
+                                <option>Boxerwood</option>
+                                <option>ESOL</option>
+                                <option>Magnolia Center</option>
+                                </select>
+                                </label>
+                                <label name = "wlu_ce_student_organization"> Student Organization (Greek Organization): <input type = "text" name = "wlu_ce_student_organization" /> </label>
+                                <h3>Campus Program</h3>
+                                <input name = "wlu_ce_campus_program" type = "checkbox" value = "Ameri Corps" /> Ameri Corps <br />
+                                <input name = "wlu_ce_campus_program" type = "checkbox" value = "Bonner" /> Bonner <br />
+                                <input name = "wlu_ce_campus_program" type = "checkbox" value = "Campus Garden" /> Campus Garden <br />
+                                <input name = "wlu_ce_campus_program" type = "checkbox" value = "Campus Kitchens" /> Campus Kitchens <br />
+                                <input name = "wlu_ce_campus_program" type = "checkbox" value = "Community Based Research" /> Community Based Research
+                                <h3>Type of Service</h3>
+                                <input name = "wlu_ce_type" type = "checkbox" value = "Administrative" /> Administrative <br />
+                                <input name = "wlu_ce_type" type = "checkbox" value = "Administrative" /> Athletic/Recreation <br />
+                                <input name = "wlu_ce_type" type = "checkbox" value = "Administrative" /> Awareness Campaign <br />
+                                </div>
+                                
+                                <script>
+                                showWluCe = function() {
+                                    $("#wlu_ce_details").show();
+                                    $("#wlu_ce").change(hideWluCe);
+                                }
+                                hideWluCe = function() {
+                                    $("#wlu_ce_details").hide()
+                                    $("#wlu_ce").change(showWluCe);
+                                }
+                                hideWluCe();
+                                </script>
+                                
+                                <input type="submit" />
+                                
+                                
+                        </fieldset>
+
+                </form>
+
+        </div>
+
+{% endblock %}

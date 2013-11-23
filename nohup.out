@@ -1,0 +1,13 @@
+"/org/freedesktop/UDisks2/drives/MATSHITADVD_RAM_UJ8C2_S_HN85_155611" : property "Drive" does not exist 
+"/org/freedesktop/UDisks2/drives/ST750LM022_HN_M750MBB_S2UQJ9CC723581" : property "Drive" does not exist 
+"/org/freedesktop/UDisks2/drives/SanDisk_SSD_i100_24GB_123000152406" : property "Drive" does not exist 
+dolphin(27936) KSambaSharePrivate::testparmParamValue: We got some errors while running testparm "Load smb config files from /etc/samba/smb.conf
+Error loading services.
+" 
+dolphin(27936) KSambaSharePrivate::findSmbConf: KSambaShare: Could not find smb.conf! 
+dolphin(27936)/kdecore (KConfigSkeleton) KCoreConfigSkeleton::writeConfig:
+dolphin(27936)/kdecore (KConfigSkeleton) KCoreConfigSkeleton::writeConfig:
+dolphin(27936)/kdecore (KConfigSkeleton) KCoreConfigSkeleton::writeConfig:
+dolphin(27936)/kdecore (KConfigSkeleton) KCoreConfigSkeleton::writeConfig:
+dolphin(27936)/kdecore (KConfigSkeleton) KCoreConfigSkeleton::writeConfig:
+dolphin(27936)/kdecore (KConfigSkeleton) KCoreConfigSkeleton::writeConfig:

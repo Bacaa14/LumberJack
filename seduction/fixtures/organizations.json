@@ -1,0 +1,16 @@
+[
+  {
+    "model": "seduction.organization",
+    "pk": 1,
+    "fields": {
+      "name": "Campus Kitchens"
+    }
+  },
+  {
+    "model": "seduction.organization",
+    "pk": 2,
+    "fields": {
+      "name": "SOS4Cancer"
+    }
+  }
+]

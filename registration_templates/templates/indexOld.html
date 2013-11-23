@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+
+<h1>Lumberjack</h1>
+
+Welcome back, {{user.get_username}}!
+<h2>Todays Schedule</h2>
+{% for shift in user.recurringshift_set.iterator %}
+{% if shift.happens_today %}
+Normally you volunteer for <a href = "seduction/{{shift.id}}">{{shift.name}}</a> from {{shift.startTime}} to {{shift.endTime}}. <a href = "seduction/logShift/{{shift.id}}">Log Hours</a>
+<br />
+{% endif %}
+{% endfor %}
+<hr />
+<h2>Other Shifts</h2>
+{% for shift in user.recurringshift_set.iterator %}
+{% if not shift.happens_today %}
+You have a shift: <a href = "seduction/{{shift.id}}">{{shift.name}}</a> from {{shift.startTime}} to {{shift.endTime}}.<a href = "seduction/logShift/{{shift.id}}">Log Hours</a>
+{% endif %}
+<br />
+{% endfor %}
+<hr />
+<a href = "seduction/create/">Log Other Hours</a>
+
+
+
+
+{% endblock %}

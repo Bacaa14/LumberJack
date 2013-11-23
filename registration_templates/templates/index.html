@@ -1,0 +1,246 @@
+<html>
+<head>
+<title>LumberJack</title>
+
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}/css/landing.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}/css/main.css">
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}/css/pureskin.css">
+</head>
+
+<body class="pure">
+
+        <div id="Wrapper">
+                <div
+                        class="pure-menu pure-menu-open pure-menu-horizontal pure-menu-fixed">
+                        <ul>
+                                <li><a href="#LR">LumberJack</a></li>
+                                <li><a href="#LH">Log Hours</a></li>
+                                <li><a href="#MH">My Hours</a></li>
+                                <li><a href="#NE">News &amp; Events</a></li>
+                        </ul>
+                </div>
+
+                <div id="header" class="pure-g-r">
+                        <div class="pure-u-1-2">
+                                <img id="logo" src="{{ STATIC_URL }}images/LumberjackLogo.jpg">
+                        </div>
+
+                        <div class="pure-u-1-2">
+                                <!-- Login Status -->
+                        </div>
+                </div>
+
+                <!-- Section Break -->
+
+                <div id="content">
+
+                        <div id="DidYou" >
+                        <h2>Today's Hours</h2>
+
+<table id="todayTable" class="pure-table">
+                                                        <thead>
+                                                                <tr>
+                                                                        <th>#</th>
+                                                                        <th>Organization</th>
+                                                                        <th>Shift Name</th>
+                                                                        <th>Log Hours?</th>
+                                                                </tr>
+                                                        </thead>
+{% for shift in user.recurringshift_set.iterator %}
+{% if shift.happens_today and not shift.last_logged_today %}
+<tr class="pure-table-odd">
+                                                                        <td>{{shift.id}}</td>
+                                                                        <td>{{shift.organization.name}}</td>
+                                                                        <td>{{shift.name}}</td>
+                                                                        <td><a href = "seduction/logShift/{{shift.id}}">Log Hours </a></td>
+                                                                </tr>
+{% endif %}
+{% endfor %}                                                        
+</table>                        
+<!-- Only appears if there are unrecorded events and then prompts for a response -->
+
+</div>
+
+                                <hr />
+                                <hr />
+
+                        <div id="Seduction">
+                                <div>
+                                        <a name="LR"></a>
+                                        <h2 style="margin-top: 5px;">Got Hours?</h2>
+                                        <a href = "seduction/create/"><button id="logButton" class="pure-button pure-button-primary">Log
+                                                'Em</button></a>
+                                </div>
+                                <!-- Log New Hours Button -->
+
+                                <hr />
+                                <hr />
+
+                                <h2>Recent Opportunities</h2>
+                                <a name="LH"></a>
+                                <div class="pure-g-r">
+                                        <div class="pure-u-4-5">
+
+                                                <table id="recentTable" class="pure-table">
+                                                        <thead>
+                                                                <tr>
+                                                                        <th>#</th>
+                                                                        <th>Organization</th>
+                                                                        <th>Event</th>
+                                                                        <th>Date</th>
+                                                                        <th>Log Hours?</th>
+                                                                </tr>
+                                                        </thead>
+
+                                                        <tbody>
+                                                                <tr class="pure-table-odd">
+                                                                        <td>1</td>
+                                                                        <td>Soup Kitchen</td>
+                                                                        <td>Kitchen Staff Volunteer</td>
+                                                                        <td>11/22/13</td>
+                                                                        <td><input type="checkbox" name="Campus Kitchens"
+                                                                                value="True"></td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                        <td>2</td>
+                                                                        <td>SOS4Cancer</td>
+                                                                        <td>Tech for Teens</td>
+                                                                        <td>11/4/14</td>
+                                                                        <td><input type="checkbox" name="Campus Kitchens"
+                                                                                value="True"></td>
+                                                                </tr>
+
+                                                                <tr class="pure-table-odd">
+                                                                        <td>3</td>
+                                                                        <td>Special Love</td>
+                                                                        <td>Octoberfest</td>
+                                                                        <td>10/30/14</td>
+                                                                        <td><input type="checkbox" name="Campus Kitchens"
+                                                                                value="True"></td>
+                                                                </tr>
+                                                        </tbody>
+                                                </table>
+
+                                        </div>
+                                        <div class="pure-u-1-5" id="recentButtons">
+                                                <button id="recentButton" class="pure-button ">Log It</button>
+                                        </div>
+                                </div>
+
+                                <hr />
+                                <hr />
+
+
+                                <!-- Recent Events Checkbox Table -->
+
+                                <!-- Table of Recurring Hours -->
+
+                                <h3>Look at you with your recurring schedule...</h3>
+                                <a name="MH"></a>
+
+
+                                <table id="schedule" class="pure-table">
+                                        <thead>
+                                                <tr>
+                                                        <th>#</th>
+                                                        <th>Organization</th>
+                                                        <th>Event/Job</th>
+                                                        <!--<th>Next Date</th>-->
+                                                        <th>End Date</th>
+                                                        <th>Start Date</th>
+                                                        <th>Cancel</th>
+                                                </tr>
+                                        </thead>
+
+                                        <tbody>
+                                        {% for shift in user.recurringshift_set.iterator %}
+                                        
+                                                <tr class="pure-table-odd">
+                                                        <td>{{shift.id}}</td>
+                                                        <td>{{shift.organization.name}}</td>
+                                                        <td>{{shift.name}}</td>
+                                                        <!--<td></td>-->
+                                                        <td>{{shift.startDate}}</td>
+                                                        <td>{{shift.endDate}}</td>
+                                                        <td><a href = "seduction/cancelShift/{{shift.id}}">Cancel</a>
+                                                </tr>
+                                                {% endfor %}
+
+                                           
+                                        </tbody>
+                                </table>
+                                
+                                <h5>(Good Job)</h5>
+
+                        </div>
+
+                        <hr />
+                        <hr />
+
+                        <div id="Info" class="pure-g-r">
+
+                                <div id="Cal">
+
+                                        <img id="CalI" src="{{ STATIC_URL }}/images/exampleCalendar.jpg">
+
+                                </div>
+
+
+                                <!-- Section Break -->
+                                   <hr />
+                                <hr />
+
+                                
+                                <div id="news" class="pure-u-1-2">
+
+
+                                        <h3>Updates/Comments</h3>
+
+                                        <div style="height: 400px; overflow-y: auto;">
+                                                <script type="text/javascript">
+                                                        function toggleMe(a) {
+                                                                var e = document.getElementById(a);
+                                                                if (!e)
+                                                                        return true;
+                                                                if (e.style.display == "none") {
+                                                                        e.style.display = "block"
+                                                                } else {
+                                                                        e.style.display = "none"
+                                                                }
+                                                                return true;
+                                                        }
+                                                </script>
+
+                                                11/20/5:43PM Campus Kitchen <b>Thanksgiving Dinner</b> <input
+                                                        type="button" onclick="return toggleMe('para1')" value="Toggle"><br>
+                                                <p id="para1" style="display: none">Campus Kitchen needs
+                                                        volunteers for making their annual Thanksgiving Dinner.</p>
+                                                <br> 11/22/ 2:56PM Active Minds <b>Study Hard, Don't Skip
+                                                        the Sleep</b> <input type="button" onclick="return toggleMe('para2')"
+                                                        value="Toggle"><br>
+                                                <p id="para2" style="display: none">There is a lot of work to
+                                                        do between now and exams, but please remind your friends to get a
+                                                        good night's sleep every once in a while! Try to get at least 5
+                                                        hours of sleep a night. It will help you remember what you spent
+                                                        all your precious time trying to study. Sleep it not a waste of
+                                                        your time.</p>
+                                                <br> 11/22 3:01PM ACM <b>Looking for Volunteers 11/25</b> <input
+                                                        type="button" onclick="return toggleMe('para3')" value="Toggle"><br>
+                                                <p id="para3" style="display: none">The Programming Club is
+                                                        looking for volunteers to help teach people that they too can be
+                                                        a nurse!</p>
+                                        </div>
+
+
+                                </div>
+
+                        </div>
+                </div>
+        </div>
+
+</body>
+
+<footer> </footer>
+</html>

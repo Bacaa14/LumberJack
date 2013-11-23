@@ -1,0 +1,80 @@
+@CHARSET "UTF-8";
+
+h2,h3,h5 {
+	color: #003254;
+}
+
+#Wrapper {
+	background-color: black;
+	padding-top: 10px;
+	margin: auto;
+	width: 760px;
+}
+
+#header {
+	background-color: #A0CF8E;
+	width: 100%;
+	height: 135px;
+}
+
+#logo {
+	margin-top: 30px;
+}
+
+#content {
+	background-color: #C4E7B6;
+	width: 100%;
+	padding-top: 10px;
+	margin-top: 7px;
+	padding-bottom: 10px;
+}
+
+#Seduction {
+	width: 100%;
+	text-align: center;
+}
+
+#logButton {
+	margin-right: 15px;
+	margin-left: 15px;
+	margin-bottom: 15px;
+}
+
+#recentTable {
+	margin: 10px;
+}
+
+#recentButtons {
+	text-align: center;
+}
+
+#recentButton {
+	margin-top: 35%;
+	margin-right: 30%
+}
+
+#schedule {
+	margin: auto;
+}
+
+#Wrapper {
+	background-color: #003254;
+}
+#todayTable {
+        margin: auto;
+}
+#DidYou {
+        text-align: center;
+}
+
+
+#calI{
+width:100%;
+}
+
+#cal {
+margin:10px;
+}
+#news{
+        margin:auto;
+}
